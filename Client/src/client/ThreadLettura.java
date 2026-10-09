@@ -8,6 +8,12 @@ package client;
  *
  * @author lutzen.jacopo
  */
-public class ThreadLettura {
+public class ThreadLettura implements Runnable {
+
+    @Override
+    public void run() {
+        
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
