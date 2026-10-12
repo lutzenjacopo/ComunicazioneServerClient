@@ -8,12 +8,39 @@ package client;
  *
  * @author lutzen.jacopo
  */
+import java.net.*;
+import java.io.*;
+
 public class ThreadLettura implements Runnable {
+
+    private final Socket socket;
+
+    public ThreadLettura(Socket socket) {
+        this.socket = socket;
+    }
 
     @Override
     public void run() {
-        
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(socket.getInputStream()));
+            String messaggio;
+
+            while ((messaggio = in.readLine()) != null) {
+                System.out.println("Server: " + messaggio);
+            }
+            System.out.println("Il server ha chiuso la connessione.");
+        } catch (IOException e) {
+            if (!socket.isClosed()) {
+                System.err.println("Errore durante la ricezione: " + e.getMessage());
+            }
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                System.err.println("Errore nella chiusura del socket: " + e.getMessage());
+            }
+        }
     }
     
 }

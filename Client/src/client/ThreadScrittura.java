@@ -29,7 +29,20 @@ public class ThreadScrittura implements Runnable{
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String messaggio;
+            while ((messaggio = tastiera.readLine()) != null) {
+                out.println(messaggio);
+
+                if ("fine".equalsIgnoreCase(messaggio)) {
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Errore durante l'invio: " + e.getMessage());
+        } finally {
+            out.close();
+        }
     }
     
 }
